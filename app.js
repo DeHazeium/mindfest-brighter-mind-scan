@@ -40,14 +40,13 @@ const messages = [
 ];
 
 const fingerButton = document.querySelector('#fingerButton');
+const experience = document.querySelector('.experience');
 const scannerPanel = document.querySelector('.scanner-panel');
 const scanLayout = document.querySelector('#scanLayout');
 const resultPanel = document.querySelector('#resultPanel');
 const resetButton = document.querySelector('#resetButton');
 const statusText = document.querySelector('#statusText');
 const progressText = document.querySelector('#progressText');
-const holdTitle = document.querySelector('#holdTitle');
-const holdSubtitle = document.querySelector('#holdSubtitle');
 const bpmValue = document.querySelector('#bpmValue');
 const deviceStatus = document.querySelector('#deviceStatus');
 const stages = [...document.querySelectorAll('.stage')];
@@ -82,8 +81,6 @@ function startScan(event) {
   fingerButton.classList.add('is-scanning');
   scannerPanel.classList.add('is-scanning');
   statusText.textContent = 'STEP 2 — KEEP HOLDING · SCANNING NOW';
-  holdTitle.textContent = 'SCANNING · KEEP HOLDING';
-  holdSubtitle.textContent = 'BREATHE IN · BREATHE OUT';
   if (navigator.vibrate) navigator.vibrate(25);
   frameId = requestAnimationFrame(updateScan);
 }
@@ -117,22 +114,18 @@ function cancelScan(event) {
   scannerPanel.classList.remove('is-scanning');
   statusText.textContent = 'FINGER LIFTED — HOLD FOR THE FULL 3 SECONDS';
   progressText.textContent = '00%';
-  holdTitle.textContent = 'PLACE FINGER HERE';
-  holdSubtitle.textContent = 'HOLD FOR 3 SECONDS';
   stages.forEach((item, index) => item.classList.toggle('active', index === 0));
   setTimeout(() => {
     if (!scanning && !completed) statusText.textContent = 'STEP 1 — PLACE & HOLD YOUR FINGER';
   }, 1200);
 }
 
-async function completeScan() {
+function completeScan() {
   scanning = false;
   completed = true;
   cancelAnimationFrame(frameId);
-  statusText.textContent = 'STEP 3 — YOUR BRIGHT SIGNAL IS READY';
   progressText.textContent = '100%';
-  holdTitle.textContent = 'SCAN COMPLETE';
-  holdSubtitle.textContent = 'YOUR MOMENT IS READY';
+  experience.classList.add('is-revealing');
   if (navigator.vibrate) navigator.vibrate([45, 45, 80]);
 
   const choice = messages[Math.floor(Math.random() * messages.length)];
@@ -145,9 +138,8 @@ async function completeScan() {
     scanLayout.classList.add('is-hidden');
     resultPanel.classList.add('is-visible');
     resultPanel.setAttribute('aria-hidden', 'false');
-  }, 420);
-
-  await celebrateWithHardware(choice);
+    celebrateWithHardware(choice);
+  }, 1000);
 }
 
 async function ensureFirebase() {
@@ -201,6 +193,7 @@ async function celebrateWithHardware(result) {
 
 function resetExperience() {
   completed = false;
+  experience.classList.remove('is-revealing');
   resultPanel.classList.remove('is-visible');
   resultPanel.setAttribute('aria-hidden', 'true');
   scanLayout.classList.remove('is-hidden');
@@ -208,8 +201,6 @@ function resetExperience() {
   scannerPanel.classList.remove('is-scanning');
   statusText.textContent = 'STEP 1 — PLACE & HOLD YOUR FINGER';
   progressText.textContent = '00%';
-  holdTitle.textContent = 'PLACE FINGER HERE';
-  holdSubtitle.textContent = 'HOLD FOR 3 SECONDS';
   bpmValue.innerHTML = '72 <small>BPM</small>';
   stages.forEach((item, index) => item.classList.toggle('active', index === 0));
 }
