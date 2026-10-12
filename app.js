@@ -81,8 +81,8 @@ function startScan(event) {
   startTime = performance.now();
   fingerButton.classList.add('is-scanning');
   scannerPanel.classList.add('is-scanning');
-  statusText.textContent = 'READING YOUR BRIGHT SIGNAL';
-  holdTitle.textContent = 'KEEP HOLDING';
+  statusText.textContent = 'STEP 2 — KEEP HOLDING · SCANNING NOW';
+  holdTitle.textContent = 'SCANNING · KEEP HOLDING';
   holdSubtitle.textContent = 'BREATHE IN · BREATHE OUT';
   if (navigator.vibrate) navigator.vibrate(25);
   frameId = requestAnimationFrame(updateScan);
@@ -115,13 +115,13 @@ function cancelScan(event) {
   cancelAnimationFrame(frameId);
   fingerButton.classList.remove('is-scanning');
   scannerPanel.classList.remove('is-scanning');
-  statusText.textContent = 'TOUCH RELEASED · TRY AGAIN';
+  statusText.textContent = 'FINGER LIFTED — HOLD FOR THE FULL 3 SECONDS';
   progressText.textContent = '00%';
-  holdTitle.textContent = 'TOUCH & HOLD';
-  holdSubtitle.textContent = '3 SECONDS';
+  holdTitle.textContent = 'PLACE FINGER HERE';
+  holdSubtitle.textContent = 'HOLD FOR 3 SECONDS';
   stages.forEach((item, index) => item.classList.toggle('active', index === 0));
   setTimeout(() => {
-    if (!scanning && !completed) statusText.textContent = 'READY FOR YOUR TOUCH';
+    if (!scanning && !completed) statusText.textContent = 'STEP 1 — PLACE & HOLD YOUR FINGER';
   }, 1200);
 }
 
@@ -129,7 +129,7 @@ async function completeScan() {
   scanning = false;
   completed = true;
   cancelAnimationFrame(frameId);
-  statusText.textContent = 'BRIGHT SIGNAL FOUND';
+  statusText.textContent = 'STEP 3 — YOUR BRIGHT SIGNAL IS READY';
   progressText.textContent = '100%';
   holdTitle.textContent = 'SCAN COMPLETE';
   holdSubtitle.textContent = 'YOUR MOMENT IS READY';
@@ -206,10 +206,10 @@ function resetExperience() {
   scanLayout.classList.remove('is-hidden');
   fingerButton.classList.remove('is-scanning');
   scannerPanel.classList.remove('is-scanning');
-  statusText.textContent = 'READY FOR YOUR TOUCH';
+  statusText.textContent = 'STEP 1 — PLACE & HOLD YOUR FINGER';
   progressText.textContent = '00%';
-  holdTitle.textContent = 'TOUCH & HOLD';
-  holdSubtitle.textContent = '3 SECONDS';
+  holdTitle.textContent = 'PLACE FINGER HERE';
+  holdSubtitle.textContent = 'HOLD FOR 3 SECONDS';
   bpmValue.innerHTML = '72 <small>BPM</small>';
   stages.forEach((item, index) => item.classList.toggle('active', index === 0));
 }
