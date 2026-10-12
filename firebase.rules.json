@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "mindfest": {
+      ".read": true,
+      ".write": true,
+      "servos": {
+        "$servo": {
+          "angle": {
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 180"
+          }
+        }
+      }
+    }
+  }
+}

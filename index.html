@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#07111f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>MindFest — The Brighter Mind Scan</title>
+    <meta
+      name="description"
+      content="A joyful, interactive Counselling Month experience by MindFest."
+    />
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="experience" aria-live="polite">
+      <header class="brandbar">
+        <a class="brand" href="#" aria-label="MindFest home">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="brand-word">MindFest</span>
+        </a>
+        <div class="event-label">
+          <span class="event-dot"></span>
+          Counselling Month
+        </div>
+      </header>
+
+      <section class="scan-layout" id="scanLayout">
+        <div class="intro-panel">
+          <p class="eyebrow">A MOMENT FOR YOUR MIND</p>
+          <h1>Meet your<br /><em>brighter side.</em></h1>
+          <p class="intro-copy">
+            Pause. Breathe. Place one finger on the light and hold for three seconds.
+          </p>
+
+          <div class="pulse-readout" aria-hidden="true">
+            <div class="pulse-meta">
+              <span><i class="live-dot"></i> POSITIVITY SIGNAL</span>
+              <strong id="bpmValue">72 <small>BPM</small></strong>
+            </div>
+            <svg class="ecg" viewBox="0 0 520 90" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="ecgFade" x1="0" x2="1">
+                  <stop offset="0" stop-color="#63f5c1" stop-opacity="0" />
+                  <stop offset="0.18" stop-color="#63f5c1" />
+                  <stop offset="0.82" stop-color="#8bf88d" />
+                  <stop offset="1" stop-color="#8bf88d" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path class="ecg-gridline" d="M0 45H520" />
+              <path
+                class="ecg-line"
+                pathLength="1000"
+                d="M0 45H64l12-2 10 2h24l13-9 10 9h22l9-15 12 43 16-64 15 54 12-18h25l14-4 12 4h35l12-2 10 2h24l13-9 10 9h22l9-15 12 43 16-64 15 54 12-18h25l14-4 12 4h41"
+              />
+              <circle class="ecg-head" cx="488" cy="45" r="4" />
+            </svg>
+          </div>
+
+          <div class="wellbeing-note">
+            <span aria-hidden="true">✦</span>
+            <p><strong>Good to know</strong>This playful experience celebrates self-care. It is not a clinical assessment.</p>
+          </div>
+        </div>
+
+        <div class="scanner-panel">
+          <div class="aurora aurora-one"></div>
+          <div class="aurora aurora-two"></div>
+
+          <div class="status-row">
+            <span id="statusText">READY FOR YOUR TOUCH</span>
+            <span id="progressText">00%</span>
+          </div>
+
+          <div class="scanner-wrap">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="scan-rays" aria-hidden="true"></div>
+
+            <button class="finger-button" id="fingerButton" type="button" aria-label="Touch and hold for three seconds to begin the MindFest scan">
+              <span class="finger-glow"></span>
+              <svg class="fingerprint" viewBox="0 0 250 300" aria-hidden="true">
+                <g class="finger-lines" fill="none" stroke="currentColor" stroke-linecap="round">
+                  <path pathLength="100" d="M51 238c-13-41-18-88-8-128C55 59 92 31 128 31c42 0 78 34 86 84 7 43-2 98-19 141" />
+                  <path pathLength="100" d="M65 257c-18-52-22-107-7-148 13-35 39-58 70-58 36 0 64 29 70 70 6 39-2 91-18 139" />
+                  <path pathLength="100" d="M81 270c-20-54-23-108-10-146 10-30 31-49 57-49 29 0 51 24 55 59 5 37-3 86-17 130" />
+                  <path pathLength="100" d="M99 279c-18-51-20-99-10-135 7-27 22-43 40-43 21 0 36 19 39 47 3 32-4 73-16 112" />
+                  <path pathLength="100" d="M119 281c-13-42-15-83-9-112 4-21 11-34 20-34 11 0 18 13 19 32 2 25-4 60-13 94" />
+                  <path pathLength="100" d="M36 203c-8-39-8-74 1-105" />
+                  <path pathLength="100" d="M215 101c8 34 5 75-3 108" />
+                  <path pathLength="100" d="M44 82c17-47 50-72 85-72 39 0 75 29 87 78" />
+                </g>
+              </svg>
+              <span class="scan-line"></span>
+              <span class="hold-label">
+                <strong id="holdTitle">TOUCH &amp; HOLD</strong>
+                <small id="holdSubtitle">3 SECONDS</small>
+              </span>
+            </button>
+          </div>
+
+          <div class="stage-list" aria-hidden="true">
+            <span class="stage active" data-stage="0"><i></i>PRESENCE</span>
+            <span class="stage" data-stage="1"><i></i>CALM</span>
+            <span class="stage" data-stage="2"><i></i>CONNECTION</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="result-panel" id="resultPanel" aria-hidden="true">
+        <button class="reset-button" id="resetButton" type="button">↻ New scan</button>
+        <div class="result-fingerprint" aria-hidden="true">
+          <svg viewBox="0 0 250 300">
+            <g id="resultPrint" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+              <path d="M51 238c-13-41-18-88-8-128C55 59 92 31 128 31c42 0 78 34 86 84 7 43-2 98-19 141" />
+              <path d="M65 257c-18-52-22-107-7-148 13-35 39-58 70-58 36 0 64 29 70 70 6 39-2 91-18 139" />
+              <path d="M81 270c-20-54-23-108-10-146 10-30 31-49 57-49 29 0 51 24 55 59 5 37-3 86-17 130" />
+              <path d="M99 279c-18-51-20-99-10-135 7-27 22-43 40-43 21 0 36 19 39 47 3 32-4 73-16 112" />
+              <path d="M119 281c-13-42-15-83-9-112 4-21 11-34 20-34 11 0 18 13 19 32 2 25-4 60-13 94" />
+            </g>
+          </svg>
+        </div>
+        <div class="result-copy">
+          <p class="eyebrow">YOUR MINDFEST MOMENT</p>
+          <h2 id="resultTitle">Your spark is<br />beautifully present.</h2>
+          <p id="resultMessage">Your scan found a bright signal: the courage to pause, check in, and choose kindness for yourself.</p>
+          <div class="result-tags" id="resultTags">
+            <span>Present</span><span>Resilient</span><span>Connected</span>
+          </div>
+          <blockquote id="resultQuote">“Small moments of care can change the shape of a whole day.”</blockquote>
+        </div>
+        <div class="result-footer">
+          <span>MindFest · Counselling Month</span>
+          <span id="deviceStatus">Connecting to the celebration…</span>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
